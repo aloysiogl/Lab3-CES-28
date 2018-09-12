@@ -2,3 +2,7 @@
 Trem/\.idea/
 
 Trem/out/
+
+trem/\.gradle/
+
+trem/gradle/

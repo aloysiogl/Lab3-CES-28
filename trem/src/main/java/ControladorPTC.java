@@ -1,7 +1,3 @@
-package com.trem;
-
-import sun.management.Sensor;
-
 import java.util.concurrent.TimeUnit;
 
 public class ControladorPTC {
