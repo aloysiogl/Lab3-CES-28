@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -6,6 +7,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.when;
+
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ControladorPTCTest {
@@ -27,7 +32,20 @@ public class ControladorPTCTest {
 
     @Test
     public void testInitialization(){
+//        controlador = new ControladorPTC(sensor, datacenter, painelCondutor);
+    }
 
+    @Test
+    public void testNotCruzamento(){
+        Double velocidade = 100.00;
+
+        //Fazendo o is cruzamento retornar false
+        when(sensor.isCruzamento()).thenReturn(false);
+        when(sensor.getVelocidade()).thenReturn(velocidade);
+
+        String velocidadeString = velocidade.toString();
+        controlador.run();
+        verify(sensor, times(34)).getVelocidade();
     }
 
     @Test
