@@ -1,8 +1,8 @@
 .idea
 
-Trem/\.idea/
+trem/.idea/
 
-Trem/out/
+trem/out/*
 
 trem/\.gradle/
 
