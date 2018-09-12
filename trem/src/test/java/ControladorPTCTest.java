@@ -1,16 +1,11 @@
-import jdk.nashorn.internal.objects.annotations.Property;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
-
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -70,7 +65,7 @@ public class ControladorPTCTest {
     public void testLowSpeedCrossing() {
         when(sensor.isCruzamento()).thenReturn(true);
         when(sensor.getVelocidade()).thenReturn(15.0);
-        when(painelCondutor.imprimirAviso("Velocidade alta", 1)).thenReturn(false);
+        when(painelCondutor.imprimirAviso("Velocidade Baixa", 1)).thenReturn(false);
         controlador.run();
         verify(sensor, times(1)).isCruzamento();
         verify(sensor, times(1)).getVelocidade();
