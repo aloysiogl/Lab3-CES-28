@@ -7,7 +7,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class ControladorPTCTest {
 
     @Mock
-    private Sensor repository;
+    private Sensor sensor;
 
     @Mock
     private Datacenter datacenter;
@@ -16,8 +16,8 @@ public class ControladorPTCTest {
     private PainelCondutor painelCondutor;
 
     @Test
-    public void test(){
-        ControladorPTC(sensor, datacenter, painelCondutor);
+    public void testInitialization(){
+        ControladorPTC controlador = new ControladorPTC(sensor, datacenter, painelCondutor);
     }
 
 }
