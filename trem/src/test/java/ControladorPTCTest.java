@@ -2,9 +2,13 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import static org.mockito.Mockito.when;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ControladorPTCTest {
@@ -33,12 +37,17 @@ public class ControladorPTCTest {
     public void testCrossingAndSensor() {
         when(sensor.isCruzamento()).thenReturn(true);
         when(sensor.getVelocidade()).thenReturn(110.0);
-        when(painelCondutor.imprimirAviso("Velocidade alta", 1)).thenReturn(true);
+        when(painelCondutor.imprimirAviso("Velocidade alta", 1)).thenReturn(false);
+        controlador.run();
+        verify(sensor, times(1)).isCruzamento();
+        verify(sensor, times(1)).getVelocidade();
+        verify(painelCondutor, times(2)).imprimirAviso("Velocidade alta", 1);
+        verify(painelCondutor, times(1)).diminuiVelocidadeTrem(20);
     }
 
     @After
     public void run() {
-        controlador.run();
+
     }
 
 }
