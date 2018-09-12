@@ -1,3 +1,4 @@
+import jdk.nashorn.internal.objects.annotations.Property;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Before;
@@ -44,8 +45,13 @@ public class ControladorPTCTest {
         when(sensor.getVelocidade()).thenReturn(velocidade);
 
         String velocidadeString = velocidade.toString();
+
         controlador.run();
-        verify(sensor, times(34)).getVelocidade();
+
+        //Verificando se o aviso impresso é a velocidade correta e se o relatório é gerado
+        verify(sensor, times(1)).getVelocidade();
+        verify(datacenter, times(1)).gerarRelatorio();
+        verify(painelCondutor, times(1)).imprimirAviso(velocidadeString, 1);
     }
 
     @Test
