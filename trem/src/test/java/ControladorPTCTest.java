@@ -1,9 +1,12 @@
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import static org.mockito.Mockito.when;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,6 +30,15 @@ public class ControladorPTCTest {
     @Test
     public void testInitialization(){
 
+    }
+
+    @Test
+    public void testNotCruzamento(){
+        //Fazendo o is cruzamento retornar false
+        when(sensor.isCruzamento()).thenReturn(false);
+
+        //
+        when(datacenter.gerarRelatorio()).thenReturn();
     }
 
     @Test
