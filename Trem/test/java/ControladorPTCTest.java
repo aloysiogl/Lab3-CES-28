@@ -1,15 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
-
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,8 +40,13 @@ public class ControladorPTCTest {
         when(sensor.getVelocidade()).thenReturn(velocidade);
 
         String velocidadeString = velocidade.toString();
+
         controlador.run();
-        verify(sensor, times(34)).getVelocidade();
+
+        //Verificando se o aviso impresso é a velocidade correta e se o relatório é gerado
+        verify(sensor, times(1)).getVelocidade();
+        verify(datacenter, times(1)).gerarRelatorio();
+        verify(painelCondutor, times(1)).imprimirAviso(velocidadeString, 1);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class ControladorPTCTest {
     public void testLowSpeedCrossing() {
         when(sensor.isCruzamento()).thenReturn(true);
         when(sensor.getVelocidade()).thenReturn(15.0);
-        when(painelCondutor.imprimirAviso("Velocidade alta", 1)).thenReturn(false);
+        when(painelCondutor.imprimirAviso("Velocidade Baixa", 1)).thenReturn(false);
         controlador.run();
         verify(sensor, times(1)).isCruzamento();
         verify(sensor, times(1)).getVelocidade();
